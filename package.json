@@ -1,0 +1,30 @@
+{
+  "name": "stenciljs-render-issues",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "npm run build && npm run serve",
+    "build": "stencil build --prod",
+    "serve": "http-server ./ -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denniswiemer/stenciljs-render-issues.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denniswiemer/stenciljs-render-issues/issues"
+  },
+  "homepage": "https://github.com/denniswiemer/stenciljs-render-issues#readme",
+  "dependencies": {
+    "@stencil/core": "1.7.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  },
+  "module": "dist/index.mjs",
+  "collection": "dist/collection/collection-manifest.json",
+  "types": "dist/types/components.d.ts"
+}

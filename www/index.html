@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" ng-app="demo">
+<head>
+    <meta charset="utf-8" />
+    <title>Render</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <meta name="theme-color" content="#16161d" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="x-ua-compatible" content="IE=Edge" />
+    <script type="module" src="../dist/demo-components/demo-components.esm.js"></script>
+    <script nomodule="" src="../dist/demo-components/demo-components.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.10/angular.min.js"></script>
+    <script>
+        angular
+            .module('demo', [])
+            .controller('homeCtrl', homeCtrl);
+
+        homeCtrl.$inject = ['$timeout'];
+
+        function homeCtrl($timeout) {
+            var vm = this;
+            vm.title = 'Default Title';
+            vm.status = false;
+            vm.showDynamic = false;
+
+            vm.changeTitle = function() {
+                vm.title = 'Updated title ' + Date.now();
+            };
+
+            vm.init = function() {
+                $timeout(function () {
+                    vm.status = true;
+                }, 500);
+            };
+
+            vm.init();
+        }
+    </script>
+    <style>
+        * {
+            font-family: Helvetica, Arial;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+            color: cornflowerblue;
+        }
+        hr {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px;
+            font-size: 14px;
+            background-color: limegreen;
+        }
+        demo-component {
+            display: block;
+            background-color: #cccccc;
+            padding: 25px;
+            border: 1px solid black;
+            margin: 20px 0 0;
+        }
+        demo-component-shadow {
+            display: block;
+            background-color: #9bbfbe;
+            padding: 25px;
+            border: 1px solid #526d6c;
+            margin: 20px 0 0;
+
+        }
+    </style>
+</head>
+
+<body>
+<div ng-controller="homeCtrl as ctrl">
+    <p>Press the buttons below to change the data.</p>
+    <button ng-click="ctrl.changeTitle()">Change title</button>
+
+    <hr/>
+    <h2>Components:</h2>
+    <demo-component heading="{{ctrl.title}}">
+        slot {{ctrl.title}}
+    </demo-component>
+    <demo-component-shadow heading="{{ctrl.title}}">
+        slot {{ctrl.title}}
+    </demo-component-shadow>
+
+
+    <hr/>
+    <h2>The following components are in a timed ng-if:</h2>
+    <div ng-if="ctrl.status">
+        <demo-component heading="timed component no shadow dom"></demo-component>
+        <demo-component-shadow heading="timed component with shadow dom"></demo-component-shadow>
+    </div>
+
+
+    <hr/>
+    <h2>The following components are in a timed ng-if with attributes & slot set by Angularjs:</h2>
+    <button ng-click="ctrl.showDynamic=!ctrl.showDynamic">Show the components</button>
+    <div ng-if="ctrl.showDynamic">
+        <demo-component ng-attr-heading="{{ctrl.title}}">
+            slot {{ctrl.title}}
+        </demo-component>
+        <demo-component-shadow ng-attr-heading="{{ctrl.title}}">
+            slot {{ctrl.title}}
+        </demo-component-shadow>
+    </div>
+
+</div>
+</body>
+</html>

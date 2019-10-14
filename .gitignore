@@ -1,0 +1,28 @@
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+
+# TypeScript
+*.map
+*.d.ts
+
+# JetBrains
+.idea
+.project
+.settings
+.idea/*
+*.iml
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Mac
+.DS_Store
+**/.DS_Store
+
+# Component
+.stencil
+dist
+tmp
